@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const initialValues = {
     firstName: '',
     lastName: '',
-    age: ''
+    age: 1
 }
 
 const UserSchema = Yup.object().shape({
@@ -39,12 +39,13 @@ const UserSchema = Yup.object().shape({
         .positive()
         .min(1)
         .max(80)
+        .default(4)
 })
 
 export default function UserDialog({open, handleClose, user}) {
     const classes = useStyles();
-    const {mutate: addUser, isLoading, isError} = useUserAdd();
-    const {mutate: editUser, isLoading: isEditing, isError: errorEditing} = useUserEdit();
+    const {mutate: addUser} = useUserAdd();
+    const {mutate: editUser} = useUserEdit();
     const isEditMode = Boolean(user)
 
     const handleSubmit = (values) => {
@@ -120,7 +121,7 @@ export default function UserDialog({open, handleClose, user}) {
                                 <Button onClick={handleClose} color="primary">
                                     Cancel
                                 </Button>
-                                <Button type="submit" color="primary">
+                                <Button type="submit" color="primary" disabled={errors.firstName || errors.lastName || errors.age}>
                                     Save
                                 </Button>
 
