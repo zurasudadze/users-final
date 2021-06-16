@@ -44,12 +44,12 @@ function App() {
         <div className={classes.root}>
             <CssBaseline/>
             <Container maxWidth="lg">
-                    <div className='header'>
+                    <section className='header'>
                         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                         <div>
                             <AddNewUser/>
                         </div>
-                    </div>
+                    </section>
                     <section className='table-section'>
                         <UserTable users={filteredUsers}/>
                         {isFetching ? 'FETCHING USERS....' : ''}

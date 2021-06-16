@@ -25,7 +25,7 @@ export default function UserTable({users}) {
     const [selectedUser, setSelectedUser] = useState(null)
     const [userToDelete, setUserToDelete] = useState(null)
     const classes = useStyles();
-    const {mutate: deleteUser, isLoading, isError} = useUserDelete();
+    const {mutate: deleteUser, isLoading} = useUserDelete();
     const {isFetching} = useUserRequest()
     const {handleOpen, handleClose, open} = useToggle();
 
