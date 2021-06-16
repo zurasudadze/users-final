@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import Spinner from "./Spinner";
 import useToggle from "../hooks/useToggle";
 import UserDialog from "./UserDialog";
+import useUserRequest from "../hooks/useUsersRequest";
 
 const useStyles = makeStyles({
     table: {
@@ -22,12 +23,15 @@ const useStyles = makeStyles({
 
 export default function UserTable({users}) {
     const [selectedUser, setSelectedUser] = useState(null)
+    const [userToDelete, setUserToDelete] = useState(null)
     const classes = useStyles();
     const {mutate: deleteUser, isLoading, isError} = useUserDelete();
+    const {isFetching} = useUserRequest()
     const {handleOpen, handleClose, open} = useToggle();
 
-    const handleDelete = (userId) => {
-        deleteUser(userId)
+    const handleDelete = (user) => {
+        deleteUser(user.id)
+        setUserToDelete(user.id)
     }
 
     const handleEdit = (user) => {
@@ -62,13 +66,10 @@ export default function UserTable({users}) {
                                 <TableCell align="right">{user.age}</TableCell>
                                 <EditUser user={user}/>
                                 <TableCell align="right">
-                                    {
-                                        isLoading ? <Spinner/> :
-                                            <Button style={{'marginRight': '5px'}} variant="contained" color="secondary"
-                                                    onClick={() => handleDelete(user.id)}>
-                                                DELETE
-                                            </Button>
-                                    }
+                                    <Button style={{'marginRight': '5px'}} variant="contained" color="secondary"
+                                            onClick={() => handleDelete(user)} disabled={isFetching && userToDelete === user.id}>
+                                    {isLoading && userToDelete === user.id ? <Spinner size={20}/> : 'DELETE'}
+                                    </Button>
                                     <Button variant="contained" color="secondary" onClick={() => handleEdit(user)}>Edit</Button>
                                 </TableCell>
                             </TableRow>

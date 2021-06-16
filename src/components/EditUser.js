@@ -26,7 +26,6 @@ const EditUser = ({user}) => {
     return (
 
         <TableCell align="right">
-
             {user.activated ?
                 <Button style={{'background': 'green' }} variant="contained" color="primary" onClick={()=> toggleStatus(user)}>
                     {isLoading ? <Spinner size={20}/> :  <CheckCircleOutlineOutlined/> }
@@ -35,8 +34,6 @@ const EditUser = ({user}) => {
                     {isLoading ? <Spinner size={20}/> : <OfflineBoltOutlined/>}
                 </Button>
             }
-
-
         </TableCell>
     )
 }

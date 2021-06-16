@@ -89,7 +89,7 @@ export default function UserDialog({open, handleClose, user}) {
                                     onBlur={handleBlur}
                                     value={values.firstName}
                                     helperText={touched.firstName ? errors.firstName : ''}
-                                    error={touched.firstName && errors.firstName}
+                                    error={!!touched.firstName && !!errors.firstName}
                                 />
                                 <TextField
                                     fullWidth
@@ -101,7 +101,7 @@ export default function UserDialog({open, handleClose, user}) {
                                     onBlur={handleBlur}
                                     value={values.lastName}
                                     helperText={touched.lastName ? errors.lastName : ''}
-                                    error={touched.lastName && errors.lastName}
+                                    error={!!touched.lastName && !!errors.lastName}
                                 />
                                 <TextField
                                     fullWidth
@@ -113,7 +113,7 @@ export default function UserDialog({open, handleClose, user}) {
                                     onBlur={handleBlur}
                                     value={values.age}
                                     helperText={touched.age ? errors.age : ''}
-                                    error={touched.age && errors.age}
+                                    error={!!touched.age && !!errors.age}
                                 />
                             </DialogContent>
                             <DialogActions>
