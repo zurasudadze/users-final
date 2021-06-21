@@ -15,8 +15,7 @@ const app = (
     </QueryClientProvider>
 )
 ReactDOM.render(
- app,
-    document.getElementById('root')
+ app, document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -2,7 +2,7 @@ import {useMutation, useQueryClient} from "react-query";
 
 const editUser = async (user) => {
 
-    const response = await fetch('/users/' + user.id , {
+    const response = await fetch('/users/' + user.id, {
         method: 'PUT',
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify(user)
@@ -15,7 +15,7 @@ const useUserEdit = () => {
     const queryClient = useQueryClient();
 
     return useMutation(editUser, {
-        onSuccess: ()=> {
+        onSuccess: () => {
             queryClient.invalidateQueries('users')
         }
     })

@@ -67,10 +67,12 @@ export default function UserTable({users}) {
                                 <EditUser user={user}/>
                                 <TableCell align="right">
                                     <Button style={{'marginRight': '5px'}} variant="contained" color="secondary"
-                                            onClick={() => handleDelete(user)} disabled={isFetching && userToDelete === user.id}>
-                                    {isLoading && userToDelete === user.id ? <Spinner size={20}/> : 'DELETE'}
+                                            onClick={() => handleDelete(user)}
+                                            disabled={isFetching && userToDelete === user.id}>
+                                        {isLoading && userToDelete === user.id ? <Spinner size={20}/> : 'DELETE'}
                                     </Button>
-                                    <Button variant="contained" color="secondary" onClick={() => handleEdit(user)}>Edit</Button>
+                                    <Button variant="contained" color="secondary"
+                                            onClick={() => handleEdit(user)}>Edit</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -1,20 +1,20 @@
 import {useMutation, useQueryClient} from "react-query";
 
-const addUser = async (user)=> {
+const addUser = async (user) => {
     const response = await fetch('/users', {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify(user)
     })
 
-    return  response.json();
+    return response.json();
 }
 
 
-const useUserAdd = ()=> {
+const useUserAdd = () => {
     const queryClient = useQueryClient();
     return useMutation(addUser, {
-        onSuccess: ()=> {
+        onSuccess: () => {
             queryClient.invalidateQueries('users')
         }
     })

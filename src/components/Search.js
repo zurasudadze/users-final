@@ -1,7 +1,6 @@
 import TextField from '@material-ui/core/TextField'
 
-const Search = ({searchTerm, setSearchTerm})=> {
-
+const Search = ({searchTerm, setSearchTerm}) => {
     const handleSearch = (event) => {
         setSearchTerm(event.target.value)
     }
@@ -11,4 +10,4 @@ const Search = ({searchTerm, setSearchTerm})=> {
         <TextField id="search" label="Search" variant="outlined" value={searchTerm} onChange={handleSearch}/>
     )
 }
- export default Search;
+export default Search;

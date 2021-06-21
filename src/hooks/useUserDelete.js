@@ -8,13 +8,13 @@ const deleteUser = async (userId) => {
             id: userId
         })
     })
-    return  response.json();
+    return response.json();
 }
 
 const useUserDelete = () => {
     const queryClient = useQueryClient();
     return useMutation(deleteUser, {
-        onSuccess: ()=> {
+        onSuccess: () => {
             queryClient.invalidateQueries('users')
         }
     })

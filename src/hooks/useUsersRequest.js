@@ -1,8 +1,7 @@
-import { useQuery } from 'react-query'
+import {useQuery} from 'react-query'
 
-const fetchUsers = async ()=> {
+const fetchUsers = async () => {
     const response = await fetch('/users')
-
     return response.json();
 }
 

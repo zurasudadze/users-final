@@ -121,7 +121,8 @@ export default function UserDialog({open, handleClose, user}) {
                                 <Button onClick={handleClose} color="primary">
                                     Cancel
                                 </Button>
-                                <Button type="submit" color="primary" disabled={!!errors.firstName || !!errors.lastName || !!errors.age}>
+                                <Button type="submit" color="primary"
+                                        disabled={!!errors.firstName || !!errors.lastName || !!errors.age}>
                                     Save
                                 </Button>
 
