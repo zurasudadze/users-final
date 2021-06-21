@@ -60,9 +60,7 @@ function App() {
             <CssBaseline/>
             <div>
                 <AppTopBar drawerWidth={drawerWidth}/>
-                {/*ესეც*/}
                 <SideBar drawerWidth={drawerWidth}/>
-                {/*ესეც*/}
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     {/*ესეც*/}

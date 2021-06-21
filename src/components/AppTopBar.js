@@ -4,16 +4,16 @@ import React from "react";
 import styled from "@material-ui/core/styles/styled";
 
 const AppTopBar = ({drawerWidth}) => (
-    <StyledAppBar position="fixed" drawerWidth={drawerWidth}>
+    <StyledAppBar position="fixed" drawerwidth={drawerWidth}>
         <Toolbar>
             USERS
         </Toolbar>
     </StyledAppBar>
 )
 
-const StyledAppBar = styled(AppBar)(({theme, drawerWidth}) => ({
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+const StyledAppBar = styled(AppBar)(({theme, drawerwidth}) => ({
+    width: `calc(100% - ${drawerwidth}px)`,
+    marginLeft: drawerwidth,
     backgroundColor: '#4B5358'
 }))
 
