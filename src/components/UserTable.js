@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,17 +13,15 @@ import Spinner from "./Spinner";
 import useToggle from "../hooks/useToggle";
 import UserDialog from "./UserDialog";
 import useUserRequest from "../hooks/useUsersRequest";
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import styled from "@material-ui/core/styles/styled";
+import Box from "@material-ui/core/Box";
 
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
-});
 
 export default function UserTable({users}) {
     const [selectedUser, setSelectedUser] = useState(null)
     const [userToDelete, setUserToDelete] = useState(null)
-    const classes = useStyles();
     const {mutate: deleteUser, isLoading} = useUserDelete();
     const {isFetching} = useUserRequest()
     const {handleOpen, handleClose, open} = useToggle();
@@ -44,15 +41,15 @@ export default function UserTable({users}) {
         <>
             <UserDialog open={open} handleClose={handleClose} user={selectedUser}/>
             <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
+                <StyledTable size='small'>
                     <TableHead>
                         <TableRow>
                             <TableCell>ID</TableCell>
                             <TableCell>First Name</TableCell>
-                            <TableCell align="right">Last Name</TableCell>
-                            <TableCell align="right">Age</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                            <TableCell align="right">Actions</TableCell>
+                            <TableCell>Last Name</TableCell>
+                            <TableCell>Age</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell> </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -62,23 +59,42 @@ export default function UserTable({users}) {
                                 <TableCell component="th" scope="row">
                                     {user.firstName}
                                 </TableCell>
-                                <TableCell align="right">{user.lastName}</TableCell>
-                                <TableCell align="right">{user.age}</TableCell>
+                                <TableCell>{user.lastName}</TableCell>
+                                <TableCell>{user.age}</TableCell>
                                 <EditUser user={user}/>
-                                <TableCell align="right">
-                                    <Button style={{'marginRight': '5px'}} variant="contained" color="secondary"
+                                <TableCell align='right'>
+                                    <Box whiteSpace='nowrap'>
+                                        <Button
+                                            style={{'marginRight': '5px'}} variant="contained" color="secondary"
                                             onClick={() => handleDelete(user)}
-                                            disabled={isFetching && userToDelete === user.id}>
-                                        {isLoading && userToDelete === user.id ? <Spinner size={20}/> : 'DELETE'}
-                                    </Button>
-                                    <Button variant="contained" color="secondary"
-                                            onClick={() => handleEdit(user)}>Edit</Button>
+                                            disabled={isFetching && userToDelete === user.id}
+                                            size='small'
+                                            margin='dense'
+                                        >
+                                            {isLoading && userToDelete === user.id ? <Spinner size={20} /> : <DeleteIcon />}
+                                        </Button>
+                                        <StyledEditButton variant="contained" color="secondary"
+                                                          onClick={() => handleEdit(user)}><EditIcon/></StyledEditButton>
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
-                </Table>
+                </StyledTable>
             </TableContainer>
         </>
     );
 }
+
+const StyledTable = styled(Table) ({
+    minWidth: 650,
+    tableLayout: 'fixed'
+})
+
+const StyledEditButton = styled(Button)({
+    backgroundColor: '#8f8c8c',
+    color: '#fff',
+   "&:hover": {
+        backgroundColor: '#353535'
+    }
+})

@@ -1,14 +1,13 @@
 import TableCell from "@material-ui/core/TableCell";
 import React from "react";
 import useUserEdit from "../hooks/useUserEdit";
-import Button from '@material-ui/core/Button';
-import {OfflineBoltOutlined, CheckCircleOutlineOutlined} from '@material-ui/icons';
+import {OfflineBoltOutlined, CheckCircleOutlineOutlined ,HighlightOff} from '@material-ui/icons';
 import Spinner from "./Spinner";
+import IconButton from "@material-ui/core/IconButton";
+import styled from "@material-ui/core/styles/styled";
 
 
-const EditUser = ({
-                user
-                  }) => {
+const EditUser = ({user}) => {
 
     const {mutate: editUser, isLoading, isError} = useUserEdit();
 
@@ -25,19 +24,24 @@ const EditUser = ({
     }
 
     return (
-        <TableCell align="right">
+        <TableCell>
             {user.activated ?
-                <Button style={{'background': 'green'}} variant="contained" color="primary"
-                        onClick={() => toggleStatus(user)}>
-                    {isLoading ? <Spinner size={20}/> : <CheckCircleOutlineOutlined/>}
-                </Button> :
-                <Button variant="contained" style={{'background': 'red', 'color': '#fff'}}
-                        onClick={() => toggleStatus(user)}>
-                    {isLoading ? <Spinner size={20}/> : <OfflineBoltOutlined/>}
-                </Button>
+                <IconButton onClick={() => toggleStatus(user)}>
+                    {isLoading ? <Spinner size={20}/> : <StyledActivatedIcon fontSize='large'/>}
+                </IconButton> :
+                <IconButton  onClick={() => toggleStatus(user)}>
+                    {isLoading ? <Spinner size={20}/> : <StyledDeactivateIcon fontSize='large'/>}
+                </IconButton>
             }
         </TableCell>
     )
 }
 
+const StyledActivatedIcon = styled(CheckCircleOutlineOutlined)({
+    color: 'rgba(9,110,21,0.64)',
+})
+
+const StyledDeactivateIcon = styled(HighlightOff)({
+    color: 'rgba(193,15,53,0.64)'
+})
 export default EditUser;

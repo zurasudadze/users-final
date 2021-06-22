@@ -18,6 +18,10 @@ const SideBar = ({drawerWidth}) => {
                     <ListItemIcon><PeopleIcon/></ListItemIcon>
                     <ListItemText>Users</ListItemText>
                 </ListItem>
+                <ListItem>
+                    <ListItemIcon><PeopleIcon/></ListItemIcon>
+                    <ListItemText>Users</ListItemText>
+                </ListItem>
             </List>
         </StyledDrawer>
     )
