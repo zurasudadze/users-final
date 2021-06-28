@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import './App.css';
 
 import UnauthenticatedApp from "./UnauthenticatedApp";
@@ -6,11 +6,11 @@ import AuthenticatedApp from "./AuthenticatedApp";
 
 
 function App() {
-    const isAuthenticated = false
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     return (
         <>
-            {isAuthenticated ? <AuthenticatedApp/> : <UnauthenticatedApp/>}
+            {isAuthenticated ? <AuthenticatedApp/> : <UnauthenticatedApp setIsAuthenticated={setIsAuthenticated}/>}
         </>
     )
 }

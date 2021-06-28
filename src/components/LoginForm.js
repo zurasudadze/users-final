@@ -49,10 +49,11 @@ const loginSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required")
 });
 
-const LoginForm = () => {
+const LoginForm = ({setIsAuthenticated}) => {
     const classes = useStyles();
     const handleSubmit = (values, {setSubmitting}) => {
         setTimeout(() => {
+            setIsAuthenticated(true)
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
         }, 400);

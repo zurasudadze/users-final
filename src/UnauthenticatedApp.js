@@ -1,10 +1,10 @@
 import React from 'react';
 import LoginForm from "./components/LoginForm";
 
-const UnauthenticatedApp = () => {
+const UnauthenticatedApp = ({setIsAuthenticated}) => {
     return (
         <div>
-            <LoginForm/>
+            <LoginForm setIsAuthenticated={setIsAuthenticated}/>
         </div>
     );
 };
