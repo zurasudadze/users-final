@@ -3,10 +3,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 import styled from "@material-ui/core/styles/styled";
 
-const AppTopBar = ({drawerWidth}) => (
+const AppTopBar = ({drawerWidth, isLoginForm, setIsLoginForm}) => (
     <StyledAppBar position="fixed" drawerwidth={drawerWidth}>
         <Toolbar>
-            USERS
+           USERS
         </Toolbar>
     </StyledAppBar>
 )

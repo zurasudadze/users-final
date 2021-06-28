@@ -1,7 +1,7 @@
 import TableCell from "@material-ui/core/TableCell";
 import React from "react";
 import useUserEdit from "../hooks/useUserEdit";
-import {OfflineBoltOutlined, CheckCircleOutlineOutlined ,HighlightOff} from '@material-ui/icons';
+import {CheckCircleOutlineOutlined, HighlightOff} from '@material-ui/icons';
 import Spinner from "./Spinner";
 import IconButton from "@material-ui/core/IconButton";
 import styled from "@material-ui/core/styles/styled";
@@ -11,7 +11,6 @@ const EditUser = ({user}) => {
 
     const {mutate: editUser, isLoading, isError} = useUserEdit();
 
-
     const toggleStatus = (user) => {
         user.activated = !user.activated;
         editUser(user)
@@ -20,7 +19,6 @@ const EditUser = ({user}) => {
                 <div>ERROR... Try Again Later...</div>
             )
         }
-
     }
 
     return (
@@ -29,7 +27,7 @@ const EditUser = ({user}) => {
                 <IconButton onClick={() => toggleStatus(user)}>
                     {isLoading ? <Spinner size={20}/> : <StyledActivatedIcon fontSize='large'/>}
                 </IconButton> :
-                <IconButton  onClick={() => toggleStatus(user)}>
+                <IconButton onClick={() => toggleStatus(user)}>
                     {isLoading ? <Spinner size={20}/> : <StyledDeactivateIcon fontSize='large'/>}
                 </IconButton>
             }

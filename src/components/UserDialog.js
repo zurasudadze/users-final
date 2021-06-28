@@ -42,7 +42,7 @@ const UserSchema = Yup.object().shape({
         .default(4)
 })
 
-export default function UserDialog({open, handleClose, user}) {
+export default function UserDialog({open, handleClose, user, isLoginForm}) {
     const classes = useStyles();
     const {mutate: addUser} = useUserAdd();
     const {mutate: editUser} = useUserEdit();
@@ -61,7 +61,6 @@ export default function UserDialog({open, handleClose, user}) {
         <div>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{isEditMode ? 'Edit' : 'Add'} User</DialogTitle>
-
                 <Formik
                     initialValues={
                         user ? {
@@ -125,12 +124,10 @@ export default function UserDialog({open, handleClose, user}) {
                                         disabled={!!errors.firstName || !!errors.lastName || !!errors.age}>
                                     Save
                                 </Button>
-
                             </DialogActions>
                         </Form>
                     )}
                 </Formik>
-
             </Dialog>
         </div>
     );
