@@ -3,44 +3,14 @@ import {Formik, Form} from 'formik'
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import Button from '@material-ui/core/Button';
-import {makeStyles} from "@material-ui/core/styles";
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import styled from "@material-ui/core/styles/styled";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        height: '100vh',
-    },
-    image: {
-        backgroundImage: 'url(https://source.unsplash.com/random)',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor:
-            theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    paper: {
-        margin: theme.spacing(8, 4),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-}));
 const loginSchema = Yup.object().shape({
     password: Yup.string()
         .min(8, "Too Short!")
@@ -50,7 +20,6 @@ const loginSchema = Yup.object().shape({
 });
 
 const LoginForm = ({setIsAuthenticated}) => {
-    const classes = useStyles();
     const handleSubmit = (values, {setSubmitting}) => {
         setTimeout(() => {
             setIsAuthenticated(true)
@@ -61,14 +30,14 @@ const LoginForm = ({setIsAuthenticated}) => {
 
 
     return (
-        <Grid container component="main" className={classes.root}>
+        <StyledRootItem container>
             <CssBaseline/>
-            <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+            <StyledImage item xs={false} sm={4} md={7}/>
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar}>
+                <StyledPaper>
+                    <StyledAvatar>
                         <LockOutlinedIcon/>
-                    </Avatar>
+                    </StyledAvatar>
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
@@ -79,10 +48,11 @@ const LoginForm = ({setIsAuthenticated}) => {
                     >
                         {({isSubmitting, handleSubmit, handleBlur, errors, values, touched, handleChange}) => {
                             return (
-                                <Form className={classes.root}>
+                                <Form>
                                     <TextField
                                         autoFocus
                                         fullWidth
+                                        autoComplete='username'
                                         id="email"
                                         label="Email"
                                         variant="outlined"
@@ -96,6 +66,7 @@ const LoginForm = ({setIsAuthenticated}) => {
                                     <TextField
                                         fullWidth
                                         id="password"
+                                        autoComplete='current-password'
                                         label="Password"
                                         variant="outlined"
                                         type="password"
@@ -113,9 +84,33 @@ const LoginForm = ({setIsAuthenticated}) => {
                             )
                         }}
                     </Formik>
-                </div>
+                </StyledPaper>
             </Grid>
-        </Grid>
+        </StyledRootItem>
     )
 }
+
+const StyledRootItem = styled(Grid)({
+    height: '100vh'
+})
+
+const StyledImage = styled(Grid)(({theme}) => ({
+        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+}))
+
+const StyledPaper = styled('div')(({theme}) => ({
+    margin: theme.spacing(8, 4),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+}))
+
+const StyledAvatar = styled(Avatar)(({theme}) => ({
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+}))
 export default LoginForm

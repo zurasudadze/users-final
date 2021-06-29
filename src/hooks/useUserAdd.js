@@ -1,11 +1,8 @@
 import {useMutation, useQueryClient} from "react-query";
+import {api} from "../utils/api";
 
 const addUser = async (user) => {
-    const response = await fetch('/users', {
-        method: 'POST',
-        headers: {'Content-type': 'application/json'},
-        body: JSON.stringify(user)
-    })
+    const response = await api('/users', {data: user })
 
     return response.json();
 }

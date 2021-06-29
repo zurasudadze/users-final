@@ -1,6 +1,5 @@
 import {useState} from "react";
 
-
 const useToggle = () => {
     const [open, setOpen] = useState(false);
 
@@ -19,4 +18,5 @@ const useToggle = () => {
     }
 
 }
+
 export default useToggle;
